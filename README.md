@@ -1,4 +1,4 @@
-# Tugas 3 Pemrograman Mobile B - android article app
+# Tugas 3 Pemrograman Mobile B - android user authentication app
 
 **Nama : Muhammad Fajri Rasid**
 
