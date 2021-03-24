@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_main_background"
+    tools:context=".SignInActivity">
+
+    <LinearLayout
+        android:paddingHorizontal="26dp"
+        android:paddingVertical="20dp"
+        android:layout_gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:layout_marginBottom="28dp"
+            android:gravity="center"
+            android:textColor="@color/secondary_text"
+            android:text="@string/welcome_back"
+            android:textSize="28sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="28dp"
+            android:src="@drawable/ic_sign_in_illustration"
+            tools:ignore="ContentDescription">
+        </ImageView>
+        
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/tilEmail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/email_address"
+            android:layout_marginBottom="15dp"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null"
+            app:helperTextTextColor="@color/design_default_color_error">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietEmail"
+                android:drawableStart="@drawable/custom_email_icon"
+                android:drawablePadding="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textEmailAddress"
+                android:textColor="@color/secondary_text"
+                android:fontFamily="@font/nunito_sans_semibold"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:id="@+id/tilPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="@string/password"
+            android:layout_marginBottom="8dp"
+            app:endIconMode="password_toggle"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null"
+            app:helperTextTextColor="#F40F0F">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/tietPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:inputType="textPassword"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <GridLayout
+            android:columnCount="2"
+            android:rowCount="1"
+            android:layout_marginBottom="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <CheckBox
+                android:id="@+id/remember_me"
+                android:text="@string/remember_me"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="start"
+                android:textColor="@color/dark_color"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_forgot_password"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:textColor="@color/dark_color"
+                android:text="@string/forgot_password"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:textSize="16sp" />
+
+        </GridLayout>
+
+        <Button
+            android:id="@+id/btn_sign_in"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/primary_color"
+            android:text="@string/sign_in"
+            android:paddingVertical="12dp"
+            android:textAllCaps="false"
+            android:elevation="4dp"
+            android:layout_marginBottom="14dp"
+            android:fontFamily="@font/nunito_sans_bold"
+            android:textSize="18sp"/>
+
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:textColor="@color/secondary_text"
+                android:text="@string/don_t_have_an_account_sign_up"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/tv_sign_up"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:textColor="@color/dark_color"
+                android:text="@string/sign_up"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <ProgressBar
+            android:id="@+id/progress_bar"
+            android:layout_marginTop="-314dp"
+            android:layout_gravity="center"
+            android:layout_width="90dp"
+            android:visibility="invisible"
+            android:layout_height="90dp">
+        </ProgressBar>
+
+    </LinearLayout>
+
+</ScrollView>

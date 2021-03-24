@@ -1,0 +1,33 @@
+<resources>
+    <string name="app_name">To-do App</string>
+    <string name="user_auth">To-do App</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam metus odio, commodo id metus in, pellentesque posuere erat.</string>
+    <string name="get_started">Get Started</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="password">Password</string>
+    <string name="forgot_password">Forgot password</string>
+    <string name="don_t_have_an_account_sign_up">Don’t have an account ?‎‎‏‏‎ ‎</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_in">Sign In</string>
+    <string name="welcome_onboard">Welcome Onboard!</string>
+    <string name="register">Register</string>
+    <string name="let_s_make_one_for_you">Lets create one for you!</string>
+    <string name="already_have_an_account">Already have an account ?‎‎‏‏‎ ‎</string>
+    <string name="fullname">Fullname</string>
+    <string name="repeat_password">Repeat password</string>
+    <string name="phone_number">Phone number</string>
+    <string name="reset_password">Reset Password</string>
+    <string name="forgot_your_password">Forgot Your Password?</string>
+    <string name="we_get_it_stuff_happens">We get it, stuff happens. Just enter your email address below and we will send you a link to reset your password!</string>
+    <string name="what_is_your_main_focus_today">What is your main focus today?</string>
+    <string name="to_do_list">To-do list</string>
+    <string name="write_your_main_focus">Your main focus</string>
+    <string name="john_doe">John Doe</string>
+    <string name="email_address">Email address</string>
+    <string name="phone_number_card">Phone number</string>
+    <string name="remember_me">Remember me</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="profile">Profile</string>
+    <string name="home">Home</string>
+</resources>

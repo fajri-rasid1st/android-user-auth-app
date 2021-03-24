@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/ic_dashboard"
+    tools:context=".HomeActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar_home"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:background="#0000BCD4"
+        android:minHeight="?attr/actionBarSize"
+        app:title="To-do App"
+        app:titleTextColor="@color/text_and_icons"
+        android:theme="@style/Theme.UserAuthApp" />
+
+    <RelativeLayout
+        android:id="@+id/top_layout"
+        android:layout_width="match_parent"
+        android:layout_marginTop="126dp"
+        android:layout_marginBottom="42dp"
+        android:paddingHorizontal="26dp"
+        android:layout_height="wrap_content">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/profile_image"
+            android:layout_width="118dp"
+            android:layout_height="118dp"
+            android:layout_centerHorizontal="true"
+            android:src="@drawable/ic_undraw_male_avatar_323b"
+            android:layout_marginBottom="16dp"
+            app:civ_border_width="3dp"
+            app:civ_border_color="@color/dark_color"/>
+
+        <TextView
+            android:id="@+id/home_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/profile_image"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal"
+            tools:text="Welcome, John Doe"
+            android:textColor="@color/text_and_icons"
+            android:textSize="28sp"
+            android:fontFamily="@font/nunito_sans_bold"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/center_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/top_layout"
+        android:paddingHorizontal="26dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_gravity="center_horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="16dp"
+            android:orientation="vertical">
+
+            <TextClock
+                android:id="@+id/textClock"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="-12dp"
+                android:fontFamily="@font/nunito_sans"
+                android:textColor="@color/secondary_text"
+                android:textSize="64sp"
+                android:format12Hour="h:mm a"/>
+
+            <TextView
+                android:id="@+id/textDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:textSize="18sp"
+                tools:text="dd/MM/yyyy"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@string/what_is_your_main_focus_today"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:textSize="22sp"/>
+
+        <EditText
+            style="@style/Theme.General"
+            android:id="@+id/et_main_focus"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:textColor="@color/secondary_text"
+            android:fontFamily="@font/nunito_sans_semibold"
+            android:hint="@string/write_your_main_focus"
+            android:autofillHints="@string/write_your_main_focus" />
+
+    </LinearLayout>
+
+</RelativeLayout>
