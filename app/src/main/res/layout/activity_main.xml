@@ -20,7 +20,7 @@
             android:fontFamily="@font/nunito_bold"
             android:text="@string/user_auth"
             android:textColor="@color/text_and_icons"
-            android:textSize="48sp" />
+            android:textSize="42sp" />
 
         <TextView
             android:id="@+id/sub_title"

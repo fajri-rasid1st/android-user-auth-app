@@ -84,6 +84,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                 } else {
                     Toast.makeText(ForgotPasswordActivity.this, "Something wrong happen. Try Again.", Toast.LENGTH_LONG).show();
                 }
+                progressBar.setVisibility(View.GONE);
             }
         });
     }
