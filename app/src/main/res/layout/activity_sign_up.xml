@@ -9,7 +9,7 @@
     tools:context=".SignUpActivity">
 
     <LinearLayout
-        android:layout_gravity="center"
+        android:layout_gravity="center_vertical"
         android:paddingHorizontal="26dp"
         android:paddingVertical="20dp"
         android:layout_width="match_parent"
@@ -48,7 +48,6 @@
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietFullname"
                 android:drawableStart="@drawable/custom_person_icon"
                 android:drawablePadding="8dp"
                 android:layout_width="match_parent"
@@ -72,7 +71,6 @@
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietEmail"
                 android:drawableStart="@drawable/custom_email_icon"
                 android:drawablePadding="8dp"
                 android:layout_width="match_parent"
@@ -96,7 +94,6 @@
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietPassword"
                 android:drawableStart="@drawable/custom_lock_icon"
                 android:drawablePadding="8dp"
                 android:layout_width="match_parent"
@@ -120,7 +117,6 @@
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietRepeatPassword"
                 android:drawableStart="@drawable/custom_lock_icon"
                 android:drawablePadding="8dp"
                 android:layout_width="match_parent"
@@ -144,7 +140,6 @@
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietPhone"
                 android:drawableStart="@drawable/custom_local_phone_icon"
                 android:drawablePadding="8dp"
                 android:layout_width="match_parent"
@@ -152,7 +147,7 @@
                 android:inputType="number"
                 android:textColor="@color/secondary_text"
                 android:fontFamily="@font/nunito_sans_semibold"
-                android:maxLength="15"/>
+                android:maxLength="14"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 

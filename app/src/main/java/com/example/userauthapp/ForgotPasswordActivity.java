@@ -12,13 +12,13 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.FirebaseAuth;
 
+import java.util.Objects;
+
 public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
     TextInputLayout tilEmail;
-    TextInputEditText tietEmail;
     ProgressBar progressBar;
     FirebaseAuth mFirebaseAuth;
 
@@ -31,48 +31,35 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         btnForgot.setOnClickListener(this);
 
         tilEmail = findViewById(R.id.tilEmail);
-        tietEmail = findViewById(R.id.tietEmail);
-
         progressBar = findViewById(R.id.progress_bar);
-
         mFirebaseAuth = FirebaseAuth.getInstance();
     }
 
     @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_forgot) {
-            if (validateField(tietEmail, tilEmail) && validateEmail(tietEmail, tilEmail)) {
-                resetPassword();
-            }
+            String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
+            resetPassword(email);
         }
     }
 
-    private boolean validateField(TextInputEditText tiet, TextInputLayout til) {
-        boolean isEmpty = tiet.getEditableText().toString().trim().isEmpty();
-
-        if (isEmpty) {
-            til.setErrorEnabled(true);
-            til.setError("Field can't be empty.");
-        } else {
-            til.setErrorEnabled(false);
-        }
-
-        return !isEmpty;
-    }
-
-    private boolean validateEmail(TextInputEditText tiet, TextInputLayout til) {
-        if (!Patterns.EMAIL_ADDRESS.matcher(tiet.getEditableText().toString().trim()).matches()) {
-            til.setErrorEnabled(true);
-            til.setError("Please provide valid email.");
+    private boolean validateEmail(String email) {
+        if (email.isEmpty()) {
+            tilEmail.setErrorEnabled(true);
+            tilEmail.setError("Field can't be empty.");
+            return false;
+        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+            tilEmail.setErrorEnabled(true);
+            tilEmail.setError("Please provide valid email.");
             return false;
         } else {
-            til.setErrorEnabled(false);
+            tilEmail.setErrorEnabled(false);
             return true;
         }
     }
 
-    private void resetPassword() {
-        String email = tietEmail.getEditableText().toString().trim();
+    private void resetPassword(String email) {
+        if (!validateEmail(email)) return;
 
         progressBar.setVisibility(View.VISIBLE);
 
@@ -84,6 +71,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                 } else {
                     Toast.makeText(ForgotPasswordActivity.this, "Something wrong happen. Try Again.", Toast.LENGTH_LONG).show();
                 }
+
                 progressBar.setVisibility(View.GONE);
             }
         });

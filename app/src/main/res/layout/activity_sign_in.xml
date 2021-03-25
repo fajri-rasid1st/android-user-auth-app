@@ -47,7 +47,6 @@
             app:helperTextTextColor="@color/design_default_color_error">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietEmail"
                 android:drawableStart="@drawable/custom_email_icon"
                 android:drawablePadding="8dp"
                 android:layout_width="match_parent"
@@ -71,7 +70,6 @@
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/tietPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_lock_icon"
