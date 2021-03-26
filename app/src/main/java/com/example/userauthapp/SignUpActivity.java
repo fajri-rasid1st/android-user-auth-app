@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -66,6 +67,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             confirmSignUp(fullname, email, password, repeatPass, phonenumber);
 
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
     }
 
     private boolean validateField(TextInputLayout textInputLayout, String text) {
@@ -138,6 +146,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         tilPhone.setErrorEnabled(false);
 
         progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -160,11 +169,13 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                             }
 
                                             progressBar.setVisibility(View.GONE);
+                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                                         }
                                     });
                         } else {
                             Toast.makeText(SignUpActivity.this, "Register failed. Try again.", Toast.LENGTH_LONG).show();
                             progressBar.setVisibility(View.GONE);
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }
                     }
                 });

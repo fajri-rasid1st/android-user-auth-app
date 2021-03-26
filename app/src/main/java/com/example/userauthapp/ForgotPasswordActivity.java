@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ProgressBar;
 import android.widget.Toast;
@@ -44,6 +45,13 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         }
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        progressBar.setVisibility(View.GONE);
+        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
     private boolean validateEmail(String email) {
         if (email.isEmpty()) {
             tilEmail.setErrorEnabled(true);
@@ -65,6 +73,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
         tilEmail.setErrorEnabled(false);
 
         progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         mFirebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
@@ -78,6 +87,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
                 }
 
                 progressBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
             }
         });
     }
