@@ -22,8 +22,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View view) {
         if (view.getId() == R.id.btn_started) {
             Intent signInIntent = new Intent(MainActivity.this, SignInActivity.class);
-            signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(signInIntent);
+
+            finish();
         }
     }
 }

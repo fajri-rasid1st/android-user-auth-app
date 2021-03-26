@@ -4,11 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -43,11 +46,37 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         btnSignIn.setOnClickListener(this);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-
         progressBar = findViewById(R.id.progress_bar);
-
         tilEmail = findViewById(R.id.tilEmail);
         tilPassword = findViewById(R.id.tilPassword);
+
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+
+        String checkBox = preferences.getString("remember", "");
+
+        if (checkBox.equals("true")) {
+            Intent homeIntent = new Intent(SignInActivity.this, HomeActivity.class);
+            startActivity(homeIntent);
+        }
+
+        CheckBox rememberMe = findViewById(R.id.remember_me);
+
+        rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+
+                if (compoundButton.isChecked()) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "true");
+                    editor.apply();
+                } else {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("remember", "false");
+                    editor.apply();
+                }
+            }
+        });
     }
 
     @Override
@@ -127,7 +156,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         tilPassword.setErrorEnabled(false);
 
         progressBar.setVisibility(View.VISIBLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         mFirebaseAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -135,7 +164,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             Intent homeIntent = new Intent(SignInActivity.this, HomeActivity.class);
-                            homeIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                             startActivity(homeIntent);
                         } else {
                             Toast.makeText(SignInActivity.this, "Login failed. Please check your credentials.", Toast.LENGTH_LONG).show();
@@ -145,6 +173,5 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
                 });
-
     }
 }

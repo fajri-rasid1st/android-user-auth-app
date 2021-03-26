@@ -41,7 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/email_address"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="14dp"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="@color/design_default_color_error">
@@ -94,6 +94,7 @@
                 android:fontFamily="@font/nunito_sans_semibold"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="-6dp"
                 android:layout_gravity="start"
                 android:textColor="@color/dark_color"
                 android:textSize="16sp" />
@@ -116,10 +117,10 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/primary_color"
             android:text="@string/sign_in"
-            android:paddingVertical="12dp"
+            android:paddingVertical="10dp"
             android:textAllCaps="false"
             android:elevation="4dp"
-            android:layout_marginBottom="14dp"
+            android:layout_marginBottom="10dp"
             android:fontFamily="@font/nunito_sans_bold"
             android:textSize="18sp"/>
 
