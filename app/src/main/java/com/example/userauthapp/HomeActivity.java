@@ -25,9 +25,10 @@ import java.util.Date;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
-    FirebaseUser user;
+    TextView homeTitle;
     DatabaseReference reference;
     String userId;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +49,7 @@ public class HomeActivity extends AppCompatActivity {
         TextView textDate = findViewById(R.id.textDate);
         textDate.setText(date);
 
-        TextView homeTitle = findViewById(R.id.home_title);
+        homeTitle = findViewById(R.id.home_title);
 
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -57,8 +58,8 @@ public class HomeActivity extends AppCompatActivity {
                 User userProfile = snapshot.getValue(User.class);
 
                 if (userProfile != null) {
-                    String fullname = userProfile.getFullname();
-                    homeTitle.setText("Welcome, " + fullname);
+                    String[] arrName = userProfile.getFullname().split(" ");
+                    homeTitle.setText("Welcome, " + arrName[0] + ".");
                 }
             }
 
@@ -67,6 +68,11 @@ public class HomeActivity extends AppCompatActivity {
                 Toast.makeText(HomeActivity.this, "Oops, something wrong happen.", Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
     }
 
     @Override
@@ -80,13 +86,17 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.profile) {
+
             Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
             startActivity(profileIntent);
-        } else if (id == R.id.sign_out) {
-            FirebaseAuth.getInstance().signOut();
 
+        } else if (id == R.id.sign_out) {
+
+            FirebaseAuth.getInstance().signOut();
             Intent signInIntent = new Intent(HomeActivity.this, SignInActivity.class);
+            signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(signInIntent);
+
         }
 
         return true;

@@ -22,18 +22,17 @@
     <RelativeLayout
         android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_marginTop="126dp"
-        android:layout_marginBottom="42dp"
-        android:paddingHorizontal="26dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_marginTop="138dp"
+        android:paddingHorizontal="26dp" >
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/profile_image"
             android:layout_width="118dp"
             android:layout_height="118dp"
             android:layout_centerHorizontal="true"
-            android:src="@drawable/ic_undraw_male_avatar_323b"
             android:layout_marginBottom="16dp"
+            android:src="@drawable/ic_undraw_male_avatar_323b"
             app:civ_border_width="3dp"
             app:civ_border_color="@color/dark_color"/>
 
@@ -44,18 +43,26 @@
             android:layout_below="@id/profile_image"
             android:layout_centerHorizontal="true"
             android:gravity="center_horizontal"
-            tools:text="Welcome, John Doe"
             android:textColor="@color/text_and_icons"
-            android:textSize="28sp"
-            android:fontFamily="@font/nunito_sans_bold"/>
+            android:textSize="24sp"
+            android:maxLines="1"
+            android:fontFamily="@font/nunito_sans_bold"
+            tools:text="Welcome, John Doe." />
 
     </RelativeLayout>
+
+    <View
+        android:id="@+id/empty_view"
+        android:layout_width="match_parent"
+        android:layout_height="67dp"
+        android:layout_below="@id/top_layout">
+    </View>
 
     <LinearLayout
         android:id="@+id/center_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/top_layout"
+        android:layout_below="@id/empty_view"
         android:paddingHorizontal="26dp"
         android:orientation="vertical">
 
@@ -63,17 +70,17 @@
             android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="18dp"
             android:orientation="vertical">
 
             <TextClock
                 android:id="@+id/textClock"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="-12dp"
+                android:layout_marginBottom="-10dp"
                 android:fontFamily="@font/nunito_sans"
                 android:textColor="@color/secondary_text"
-                android:textSize="64sp"
+                android:textSize="54sp"
                 android:format12Hour="h:mm a"/>
 
             <TextView
@@ -82,8 +89,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:fontFamily="@font/nunito_sans_semibold"
-                android:textSize="18sp"
-                tools:text="dd/MM/yyyy"/>
+                android:textSize="16sp"
+                tools:text="31/12/2021"/>
 
         </LinearLayout>
 
@@ -102,9 +109,10 @@
             android:layout_height="wrap_content"
             android:inputType="text"
             android:gravity="center"
-            android:textSize="20sp"
+            android:textSize="18sp"
             android:textColor="@color/secondary_text"
             android:fontFamily="@font/nunito_sans_semibold"
+            android:backgroundTint="@color/secondary_text"
             android:hint="@string/write_your_main_focus"
             android:autofillHints="@string/write_your_main_focus" />
 

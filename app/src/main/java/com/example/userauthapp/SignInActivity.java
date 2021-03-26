@@ -119,6 +119,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private void confirmSignIn(String email, String password) {
         if (!validateEmail(email) | !validatePassword(password)) return;
 
+        tilEmail.setErrorEnabled(false);
+        tilPassword.setErrorEnabled(false);
+
         progressBar.setVisibility(View.VISIBLE);
 
         mFirebaseAuth.signInWithEmailAndPassword(email, password)

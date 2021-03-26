@@ -26,8 +26,6 @@
     <string name="email_address">Email address</string>
     <string name="phone_number_card">Phone number</string>
     <string name="remember_me">Remember me</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="profile">Profile</string>
     <string name="home">Home</string>
 </resources>

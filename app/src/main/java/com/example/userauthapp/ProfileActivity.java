@@ -18,10 +18,10 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 public class ProfileActivity extends AppCompatActivity {
-    TextView tvFullname, tvEmail, tvPhonenumber;
-    FirebaseUser user;
+    TextView tvNickname, tvFullname, tvEmail, tvPhonenumber;
     DatabaseReference reference;
     String userId;
+    FirebaseUser user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,9 +38,10 @@ public class ProfileActivity extends AppCompatActivity {
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userId = user.getUid();
 
+        tvNickname = findViewById(R.id.nick_name);
         tvFullname = findViewById(R.id.fullname_text);
-        tvPhonenumber = findViewById(R.id.phone_number_text);
         tvEmail = findViewById(R.id.email_text);
+        tvPhonenumber = findViewById(R.id.phone_text);
 
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @SuppressLint("SetTextI18n")
@@ -53,6 +54,7 @@ public class ProfileActivity extends AppCompatActivity {
                     String email = userProfile.getEmail();
                     String phonenumber = userProfile.getPhoneNumber();
 
+                    tvNickname.setText(fullname.split(" ")[0]);
                     tvFullname.setText(fullname);
                     tvEmail.setText(email);
                     tvPhonenumber.setText(phonenumber);

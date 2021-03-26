@@ -3,6 +3,7 @@ package com.example.userauthapp;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -61,6 +62,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
     private void resetPassword(String email) {
         if (!validateEmail(email)) return;
 
+        tilEmail.setErrorEnabled(false);
+
         progressBar.setVisibility(View.VISIBLE);
 
         mFirebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
@@ -68,6 +71,8 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
                     Toast.makeText(ForgotPasswordActivity.this, "Check your email to reset your password.", Toast.LENGTH_LONG).show();
+                    Intent signInIntent = new Intent(ForgotPasswordActivity.this, SignInActivity.class);
+                    startActivity(signInIntent);
                 } else {
                     Toast.makeText(ForgotPasswordActivity.this, "Something wrong happen. Try Again.", Toast.LENGTH_LONG).show();
                 }

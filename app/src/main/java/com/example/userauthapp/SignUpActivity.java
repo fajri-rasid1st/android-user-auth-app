@@ -131,6 +131,12 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                 !validatePassword(password) |
                 !validateRepeatPassword(repeatPassword, password)) return;
 
+        tilFullname.setErrorEnabled(false);
+        tilEmail.setErrorEnabled(false);
+        tilPassword.setErrorEnabled(false);
+        tilRepeatPass.setErrorEnabled(false);
+        tilPhone.setErrorEnabled(false);
+
         progressBar.setVisibility(View.VISIBLE);
 
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
