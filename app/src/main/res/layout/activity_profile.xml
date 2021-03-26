@@ -1,181 +1,187 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/ic_dashboard"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/ic_dashboard"
-    tools:context=".ProfileActivity">
-
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_profile"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:background="#0000BCD4"
-        android:minHeight="?attr/actionBarSize"
-        app:title="Profile"
-        app:titleTextColor="@color/text_and_icons"
-        android:theme="@style/Theme.UserAuthApp"/>
+    tools:context=".ProfileActivity" >
 
     <RelativeLayout
-        android:id="@+id/top_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingHorizontal="26dp"
-        android:layout_marginTop="138dp">
+        android:layout_height="wrap_content">
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/profile_image"
-            android:layout_width="118dp"
-            android:layout_height="118dp"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="16dp"
-            android:src="@drawable/ic_undraw_male_avatar_323b"
-            app:civ_border_width="3dp"
-            app:civ_border_color="@color/dark_color"/>
-
-        <TextView
-            android:id="@+id/nick_name"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar_profile"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/profile_image"
-            android:layout_centerHorizontal="true"
-            android:gravity="center_horizontal"
-            android:textColor="@color/text_and_icons"
-            android:textSize="24sp"
-            android:maxLines="1"
-            android:fontFamily="@font/nunito_sans_bold"
-            tools:text="@string/john_doe" />
+            android:layout_gravity="top"
+            android:background="#0000BCD4"
+            android:minHeight="?attr/actionBarSize"
+            app:title="Profile"
+            app:titleTextColor="@color/text_and_icons"
+            android:theme="@style/Theme.UserAuthApp"/>
+
+        <RelativeLayout
+            android:id="@+id/top_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="26dp"
+            android:layout_marginTop="138dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_image"
+                android:layout_width="118dp"
+                android:layout_height="118dp"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:src="@drawable/ic_undraw_male_avatar_323b"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/dark_color"/>
+
+            <TextView
+                android:id="@+id/nick_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:gravity="center_horizontal"
+                android:textColor="@color/text_and_icons"
+                android:textSize="24sp"
+                android:maxLines="1"
+                android:fontFamily="@font/nunito_sans_bold"
+                tools:text="@string/john_doe" />
+
+        </RelativeLayout>
+
+        <View
+            android:id="@+id/empty_view"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_below="@id/top_layout">
+        </View>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="22dp"
+            android:orientation="vertical"
+            android:layout_below="@id/empty_view">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/fullname_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginBottom="24dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:padding="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fullname"
+                        android:textColor="@color/secondary_text"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/nunito_sans_bold"/>
+
+                    <TextView
+                        android:id="@+id/fullname_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/nunito_sans"
+                        tools:text="Ahmad John Doe" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/email_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginBottom="24dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:padding="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/email_address"
+                        android:textColor="@color/secondary_text"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/nunito_sans_bold"/>
+
+                    <TextView
+                        android:id="@+id/email_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/nunito_sans"
+                        tools:text="Johndoe@gmail.com" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/phone_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginHorizontal="4dp"
+                android:layout_marginBottom="24dp"
+                app:cardElevation="4dp"
+                app:cardCornerRadius="4dp">
+
+                <LinearLayout
+                    android:padding="12dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/phone_number"
+                        android:textColor="@color/secondary_text"
+                        android:layout_marginBottom="8dp"
+                        android:fontFamily="@font/nunito_sans_bold"/>
+
+                    <TextView
+                        android:id="@+id/phone_text"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/secondary_text"
+                        android:textSize="16sp"
+                        android:fontFamily="@font/nunito_sans"
+                        tools:text="082290380510" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+        </LinearLayout>
 
     </RelativeLayout>
 
-    <View
-        android:id="@+id/empty_view"
-        android:layout_width="match_parent"
-        android:layout_height="72dp"
-        android:layout_below="@id/top_layout">
-    </View>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="22dp"
-        android:orientation="vertical"
-        android:layout_below="@id/empty_view">
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/fullname_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_marginBottom="24dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/fullname"
-                    android:textColor="@color/secondary_text"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/nunito_sans_bold"/>
-
-                <TextView
-                    android:id="@+id/fullname_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/nunito_sans"
-                    tools:text="Ahmad John Doe" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/email_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_marginBottom="24dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/email_address"
-                    android:textColor="@color/secondary_text"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/nunito_sans_bold"/>
-
-                <TextView
-                    android:id="@+id/email_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/nunito_sans"
-                    tools:text="Johndoe@gmail.com" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/phone_card"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
-            android:layout_marginHorizontal="4dp"
-            android:layout_marginBottom="24dp"
-            app:cardElevation="4dp"
-            app:cardCornerRadius="4dp">
-
-            <LinearLayout
-                android:padding="12dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/phone_number"
-                    android:textColor="@color/secondary_text"
-                    android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/nunito_sans_bold"/>
-
-                <TextView
-                    android:id="@+id/phone_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/secondary_text"
-                    android:textSize="16sp"
-                    android:fontFamily="@font/nunito_sans"
-                    tools:text="082290380510" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-    </LinearLayout>
-
-</RelativeLayout>
+</ScrollView>

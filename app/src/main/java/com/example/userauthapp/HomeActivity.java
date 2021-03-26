@@ -5,6 +5,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -72,7 +74,7 @@ public class HomeActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        return;
     }
 
     @Override
@@ -86,19 +88,36 @@ public class HomeActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.profile) {
-
             Intent profileIntent = new Intent(HomeActivity.this, ProfileActivity.class);
             startActivity(profileIntent);
-
         } else if (id == R.id.sign_out) {
-
-            FirebaseAuth.getInstance().signOut();
-            Intent signInIntent = new Intent(HomeActivity.this, SignInActivity.class);
-            signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-            startActivity(signInIntent);
-
+            showSignOutAlertDialog();
         }
 
         return true;
+    }
+
+    private void showSignOutAlertDialog() {
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+
+        alert.setTitle("Confirm Sign Out");
+        alert.setMessage("Are you sure you want to log out?");
+        alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                FirebaseAuth.getInstance().signOut();
+                Intent signInIntent = new Intent(HomeActivity.this, SignInActivity.class);
+                signInIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(signInIntent);
+            }
+        });
+        alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                return;
+            }
+        });
+        alert.create();
+        alert.show();
     }
 }
