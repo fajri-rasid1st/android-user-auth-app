@@ -58,8 +58,14 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_in);
 
+        // initialize firebase, progress bar, email, and password
+        mFirebaseAuth = FirebaseAuth.getInstance();
+        progressBar = findViewById(R.id.progress_bar);
+        tilEmail = findViewById(R.id.tilEmail);
+        tilPassword = findViewById(R.id.tilPassword);
+
         // create request for google sign in method
-        createRequestGoogleSignIn();
+        createRequest();
 
         // initialize text view sign up
         TextView tvSignUp = findViewById(R.id.tv_sign_up);
@@ -76,12 +82,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         // initialize sign in google button
         Button btnSignInGoogle = findViewById(R.id.btn_sign_in_google);
         btnSignInGoogle.setOnClickListener(this);
-
-        // initialize firebase, progress bar, email, and password
-        mFirebaseAuth = FirebaseAuth.getInstance();
-        progressBar = findViewById(R.id.progress_bar);
-        tilEmail = findViewById(R.id.tilEmail);
-        tilPassword = findViewById(R.id.tilPassword);
 
         // 'remember me' fuctionality
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
@@ -133,12 +133,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString().trim();
             confirmSignIn(email, password);
 
-        } else if (view.getId() == R.id.btn_sign_in_google) {
-
-            Intent signInIntent = mGoogleSignInClient.getSignInIntent();
-            startActivityForResult(signInIntent, RC_SIGN_IN);
-
-        }
+        } else if (view.getId() == R.id.btn_sign_in_google) signIn();
     }
 
     @Override
@@ -214,7 +209,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 });
     }
 
-    private void createRequestGoogleSignIn() {
+    private void createRequest() {
         // Configure Google Sign In
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
@@ -223,6 +218,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+    }
+
+    private void signIn() {
+        Intent signInIntent = mGoogleSignInClient.getSignInIntent();
+        startActivityForResult(signInIntent, RC_SIGN_IN);
     }
 
     @Override
@@ -241,16 +241,13 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(SignInActivity.this, "Google sign in failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
             }
         }
     }
 
     private void firebaseAuthWithGoogle(String idToken) {
         AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-
-        progressBar.setVisibility(View.VISIBLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -264,9 +261,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignInActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
                         }
-
-                        progressBar.setVisibility(View.GONE);
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                     }
                 });
     }
