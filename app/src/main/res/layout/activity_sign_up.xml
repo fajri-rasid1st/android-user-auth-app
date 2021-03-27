@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -9,145 +8,143 @@
     tools:context=".SignUpActivity">
 
     <LinearLayout
-        android:layout_gravity="center_vertical"
-        android:paddingHorizontal="26dp"
-        android:paddingVertical="20dp"
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
         android:orientation="vertical"
-        android:layout_height="wrap_content">
+        android:paddingHorizontal="26dp"
+        android:paddingVertical="20dp">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_sans_semibold"
-            android:gravity="center"
-            android:textColor="@color/secondary_text"
             android:text="@string/welcome_onboard"
+            android:textColor="@color/secondary_text"
             android:textSize="28sp" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="22dp"
             android:fontFamily="@font/nunito_sans_semibold"
-            android:layout_marginBottom="28dp"
-            android:gravity="center"
-            android:textColor="@color/secondary_text"
             android:text="@string/let_s_make_one_for_you"
+            android:textColor="@color/secondary_text"
             android:textSize="16sp" />
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilFullname"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/fullname"
             android:layout_marginBottom="14dp"
+            android:hint="@string/fullname"
             app:counterMaxLength="50"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_person_icon"
                 android:drawablePadding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="text"
-                android:textColor="@color/secondary_text"
                 android:fontFamily="@font/nunito_sans_semibold"
-                android:maxLength="51"/>
+                android:inputType="text"
+                android:maxLength="51"
+                android:textColor="@color/secondary_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilEmail"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/email_address"
             android:layout_marginBottom="14dp"
+            android:hint="@string/email_address"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_email_icon"
                 android:drawablePadding="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/secondary_text"
-                android:fontFamily="@font/nunito_sans_semibold"/>
+                android:textColor="@color/secondary_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="14dp"
             android:hint="@string/password"
-            android:layout_marginBottom="14dp"
             app:endIconMode="password_toggle"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:drawablePadding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/nunito_sans_semibold"
                 android:inputType="textPassword"
-                android:textColor="@color/secondary_text"
-                android:fontFamily="@font/nunito_sans_semibold"/>
+                android:textColor="@color/secondary_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilRepeatPassword"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/repeat_password"
             android:layout_marginBottom="14dp"
+            android:hint="@string/repeat_password"
             app:endIconMode="password_toggle"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:drawableStart="@drawable/custom_lock_icon"
-                android:drawablePadding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:drawableStart="@drawable/custom_lock_icon"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/nunito_sans_semibold"
                 android:inputType="textPassword"
-                android:textColor="@color/secondary_text"
-                android:fontFamily="@font/nunito_sans_semibold"/>
+                android:textColor="@color/secondary_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:id="@+id/tilPhone"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="@string/phone_number"
             android:layout_marginBottom="16dp"
+            android:hint="@string/phone_number"
             app:counterMaxLength="14"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:drawableStart="@drawable/custom_local_phone_icon"
-                android:drawablePadding="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:inputType="number"
-                android:textColor="@color/secondary_text"
+                android:drawableStart="@drawable/custom_local_phone_icon"
+                android:drawablePadding="8dp"
                 android:fontFamily="@font/nunito_sans_semibold"
-                android:maxLength="14"/>
+                android:inputType="number"
+                android:maxLength="14"
+                android:textColor="@color/secondary_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -155,19 +152,17 @@
             android:id="@+id/btn_sign_up"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/primary_color"
-            android:text="@string/register"
-            android:paddingVertical="10dp"
-            android:textAllCaps="false"
-            android:elevation="4dp"
             android:layout_marginBottom="10dp"
+            android:backgroundTint="@color/primary_color"
+            android:elevation="4dp"
             android:fontFamily="@font/nunito_sans_bold"
-            android:textSize="18sp"/>
+            android:text="@string/register"
+            android:textAllCaps="false" />
 
         <LinearLayout
-            android:layout_gravity="center_horizontal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
             android:orientation="horizontal">
 
             <TextView
@@ -175,8 +170,8 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_sans_semibold"
                 android:gravity="center"
-                android:textColor="@color/secondary_text"
                 android:text="@string/already_have_an_account"
+                android:textColor="@color/secondary_text"
                 android:textSize="16sp" />
 
             <TextView
@@ -185,19 +180,18 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_sans_semibold"
                 android:gravity="center"
-                android:textColor="@color/dark_color"
                 android:text="@string/sign_in"
+                android:textColor="@color/dark_color"
                 android:textSize="16sp" />
         </LinearLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar"
-            android:layout_marginTop="-314dp"
-            android:layout_gravity="center"
             android:layout_width="90dp"
-            android:visibility="invisible"
-            android:layout_height="90dp">
-        </ProgressBar>
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="-314dp"
+            android:visibility="invisible" />
 
     </LinearLayout>
 
