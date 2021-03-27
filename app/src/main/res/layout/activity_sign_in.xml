@@ -62,15 +62,15 @@
         </LinearLayout>
 
         <GridLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="16dp"
+            android:layout_gravity="center"
             android:columnCount="3"
-            android:orientation="horizontal"
             android:rowCount="1">
 
             <View
-                android:layout_width="157dp"
+                android:layout_width="130dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/secondary_text" />
@@ -85,7 +85,7 @@
                 android:textSize="16sp" />
 
             <View
-                android:layout_width="157dp"
+                android:layout_width="130dp"
                 android:layout_height="1dp"
                 android:layout_gravity="center_vertical"
                 android:background="@color/secondary_text" />

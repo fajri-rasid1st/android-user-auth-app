@@ -15,6 +15,8 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -26,6 +28,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
     TextView homeTitle;
@@ -33,6 +36,7 @@ public class HomeActivity extends AppCompatActivity {
     String userId;
     FirebaseUser user;
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +48,7 @@ public class HomeActivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         reference = FirebaseDatabase.getInstance().getReference("Users");
         userId = user.getUid();
+        homeTitle = findViewById(R.id.home_title);
 
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("id", "ID"));
@@ -52,25 +57,29 @@ public class HomeActivity extends AppCompatActivity {
         TextView textDate = findViewById(R.id.textDate);
         textDate.setText(date);
 
-        homeTitle = findViewById(R.id.home_title);
+        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
 
-        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-            @SuppressLint("SetTextI18n")
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                User userProfile = snapshot.getValue(User.class);
+        if (signInAccount != null) {
+            String name = Objects.requireNonNull(signInAccount.getDisplayName()).split(" ")[0];
+            homeTitle.setText("Welcome, " + name.replaceFirst(String.valueOf(name.charAt(0)), String.valueOf(name.charAt(0)).toUpperCase()) + ".");
+        } else {
+            reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    User userProfile = snapshot.getValue(User.class);
 
-                if (userProfile != null) {
-                    String[] arrName = userProfile.getFullname().split(" ");
-                    homeTitle.setText("Welcome, " + arrName[0] + ".");
+                    if (userProfile != null) {
+                        String name = userProfile.getFullname().split(" ")[0];
+                        homeTitle.setText("Welcome, " + name.replaceFirst(String.valueOf(name.charAt(0)), String.valueOf(name.charAt(0)).toUpperCase()) + ".");
+                    }
                 }
-            }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-                Toast.makeText(HomeActivity.this, "Oops, something wrong happen.", Toast.LENGTH_SHORT).show();
-            }
-        });
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                    Toast.makeText(HomeActivity.this, "Oops, something wrong happen.", Toast.LENGTH_SHORT).show();
+                }
+            });
+        }
     }
 
     @Override
