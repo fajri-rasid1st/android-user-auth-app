@@ -17,6 +17,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInClient;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -115,15 +117,7 @@ public class HomeActivity extends AppCompatActivity {
         alert.setPositiveButton("YES", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
-                FirebaseAuth.getInstance().signOut();
-
-                SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-                SharedPreferences.Editor editor = preferences.edit();
-
-                editor.putString("remember", "false");
-                editor.apply();
-
-                finish();
+                signOut();
             }
         });
         alert.setNegativeButton("NO", new DialogInterface.OnClickListener() {
@@ -134,5 +128,21 @@ public class HomeActivity extends AppCompatActivity {
         });
         alert.create();
         alert.show();
+    }
+
+    private void signOut() {
+        FirebaseAuth.getInstance().signOut();
+
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN).build();
+        GoogleSignInClient googleSignInClient = GoogleSignIn.getClient(getApplicationContext(), gso);
+        googleSignInClient.signOut();
+
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("remember", "false");
+        editor.apply();
+
+        finish();
     }
 }

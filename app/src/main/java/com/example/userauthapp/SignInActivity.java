@@ -280,9 +280,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                                     .addOnCompleteListener(new OnCompleteListener<Void>() {
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
-                                            if (task.isSuccessful()) {
-                                                Toast.makeText(SignInActivity.this, "Your account has been register successfully.", Toast.LENGTH_SHORT).show();
-                                            } else {
+                                            if (!task.isSuccessful()) {
                                                 Toast.makeText(SignInActivity.this, "Register failed. Try again.", Toast.LENGTH_SHORT).show();
                                             }
 
