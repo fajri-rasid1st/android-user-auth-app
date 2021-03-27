@@ -29,8 +29,17 @@
     <string name="profile">Profile</string>
     <string name="home">Home</string>
     <string name="for_security_reason">For security reasons, we do NOT store your password. So rest assured that we will never send your password via email.</string>
-    <string name="sign_in_to_to_do_app" tools:ignore="Typos">Sign in to to-do app</string>
+    <string name="sign_in_to_to_do_app" tools:ignore="Typos">Sign in to user-auth app</string>
     <string name="sign_in_with_google">Sign in with Google</string>
     <string name="or">Or</string>
     <string name="sign_in_with_phone_number">Sign in with phone number</string>
+    <string name="sign_in_with">Sign in with</string>
+    <string name="enter_the_phone_number_that_you_registered_earlier">Enter the phone number that you registered earlier.</string>
+    <string name="phone_number_2">Phone Number</string>
+    <string name="send_otp">Send OTP</string>
+    <string name="otp_verification">OTP Verification</string>
+    <string name="enter_the_otp_that_has_been_sent_to_your_phone_number">Enter the OTP that has been sent to your phone number.</string>
+    <string name="submit">Submit</string>
+    <string name="did_not_receive_the_otp">Did not receive the OTP?‎‎‏‏‎ ‎</string>
+    <string name="resend_otp">Resend OTP</string>
 </resources>

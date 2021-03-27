@@ -39,7 +39,6 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="14dp"
             android:hint="@string/fullname"
-            app:counterMaxLength="50"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
@@ -51,7 +50,7 @@
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/nunito_sans_semibold"
                 android:inputType="text"
-                android:maxLength="51"
+                android:maxLength="50"
                 android:textColor="@color/secondary_text" />
 
         </com.google.android.material.textfield.TextInputLayout>
@@ -131,20 +130,21 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:hint="@string/phone_number"
-            app:counterMaxLength="14"
             app:errorEnabled="false"
             app:errorIconDrawable="@null"
             app:helperTextTextColor="#F40F0F">
 
-            <com.google.android.material.textfield.TextInputEditText
+            <com.santalu.maskara.widget.MaskEditText
+                android:id="@+id/metPhone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:drawableStart="@drawable/custom_local_phone_icon"
                 android:drawablePadding="8dp"
                 android:fontFamily="@font/nunito_sans_semibold"
                 android:inputType="number"
-                android:maxLength="14"
-                android:textColor="@color/secondary_text" />
+                android:maxLength="20"
+                android:textColor="@color/secondary_text"
+                app:mask="+62 (___) ___ __ ___"/>
 
         </com.google.android.material.textfield.TextInputLayout>
 
@@ -190,7 +190,7 @@
             android:layout_width="90dp"
             android:layout_height="90dp"
             android:layout_gravity="center"
-            android:layout_marginTop="-314dp"
+            android:layout_marginTop="-334dp"
             android:visibility="invisible" />
 
     </LinearLayout>

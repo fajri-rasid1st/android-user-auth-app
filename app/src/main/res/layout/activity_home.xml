@@ -15,7 +15,7 @@
         android:layout_gravity="top"
         android:background="#0000BCD4"
         android:minHeight="?attr/actionBarSize"
-        app:title="To-do App"
+        app:title="User-auth App"
         app:titleTextColor="@color/text_and_icons"
         android:theme="@style/Theme.UserAuthApp" />
 

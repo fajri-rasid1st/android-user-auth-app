@@ -19,12 +19,14 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
+import com.santalu.maskara.widget.MaskEditText;
 
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
     ProgressBar progressBar;
     TextInputLayout tilEmail, tilPassword, tilFullname, tilRepeatPass, tilPhone;
+    MaskEditText metPhone;
     FirebaseAuth mFirebaseAuth;
 
     @Override
@@ -47,6 +49,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         tilRepeatPass = findViewById(R.id.tilRepeatPassword);
         tilFullname = findViewById(R.id.tilFullname);
         tilPhone = findViewById(R.id.tilPhone);
+        metPhone = findViewById(R.id.metPhone);
     }
 
     @Override
@@ -63,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
             String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString().trim();
             String repeatPass = Objects.requireNonNull(tilRepeatPass.getEditText()).getText().toString().trim();
-            String phonenumber = Objects.requireNonNull(tilPhone.getEditText()).getText().toString().trim();
+            String phonenumber = "0" + metPhone.getUnMasked();
             confirmSignUp(fullname, email, password, repeatPass, phonenumber);
 
         }
@@ -146,7 +149,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         tilPhone.setErrorEnabled(false);
 
         progressBar.setVisibility(View.VISIBLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE,WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
         mFirebaseAuth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {

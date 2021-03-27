@@ -140,7 +140,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         } else if (view.getId() == R.id.btn_sign_in_phone_number) {
 
-            Toast.makeText(this, "This feature is under development.", Toast.LENGTH_SHORT).show();
+            Intent signInPhone = new Intent(SignInActivity.this, PhoneNumberActivity.class);
+            signInPhone.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(signInPhone);
 
         } else if (view.getId() == R.id.btn_sign_in_google) signIn();
     }
@@ -250,7 +252,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                 firebaseAuthWithGoogle(account.getIdToken());
             } catch (ApiException e) {
                 // Google Sign In failed, update UI appropriately
-                Toast.makeText(SignInActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignInActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
             }
         }
     }
