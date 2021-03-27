@@ -27,8 +27,9 @@ import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-// import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
 
@@ -36,10 +37,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressBar progressBar;
     private TextInputLayout tilEmail, tilPassword;
     private GoogleSignInClient mGoogleSignInClient;
-    private FirebaseAuth mFirebaseAuth;
     private Toast exitToast;
     private long backPressedTime;
     private final static int RC_SIGN_IN = 123;
+    private FirebaseAuth mFirebaseAuth;
 
 //    @Override
 //    public void onStart() {
@@ -82,6 +83,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         // initialize sign in google button
         Button btnSignInGoogle = findViewById(R.id.btn_sign_in_google);
         btnSignInGoogle.setOnClickListener(this);
+
+        // initialize sign in OTP phone number
+        Button btnSignInPhone = findViewById(R.id.btn_sign_in_phone_number);
+        btnSignInPhone.setOnClickListener(this);
 
         // 'remember me' fuctionality
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
@@ -132,6 +137,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
             String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
             String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString().trim();
             confirmSignIn(email, password);
+
+        } else if (view.getId() == R.id.btn_sign_in_phone_number) {
+
+            Toast.makeText(this, "This feature is under development.", Toast.LENGTH_SHORT).show();
 
         } else if (view.getId() == R.id.btn_sign_in_google) signIn();
     }
@@ -258,15 +267,39 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
+
+                            String fullname = currentUser != null ? currentUser.getDisplayName() : null;
+                            String email = currentUser != null ? currentUser.getEmail() : null;
+                            String phonenumber = currentUser != null ? currentUser.getPhoneNumber() : null;
+
+                            User user = new User(fullname, email, phonenumber);
+
+                            FirebaseDatabase.getInstance().getReference("Users")
+                                    .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).setValue(user)
+                                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                                        @Override
+                                        public void onComplete(@NonNull Task<Void> task) {
+                                            if (task.isSuccessful()) {
+                                                Toast.makeText(SignInActivity.this, "Your account has been register successfully.", Toast.LENGTH_SHORT).show();
+                                            } else {
+                                                Toast.makeText(SignInActivity.this, "Register failed. Try again.", Toast.LENGTH_SHORT).show();
+                                            }
+
+                                            progressBar.setVisibility(View.GONE);
+                                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                                        }
+                                    });
+
                             Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
                             startActivity(homeIntent);
                         } else {
                             // If sign in fails, display a message to the user.
                             Toast.makeText(SignInActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();
-                        }
 
-                        progressBar.setVisibility(View.GONE);
-                        getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                            progressBar.setVisibility(View.GONE);
+                            getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                        }
                     }
                 });
     }

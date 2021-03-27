@@ -174,6 +174,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     });
                         } else {
                             Toast.makeText(SignUpActivity.this, "Register failed. Try again.", Toast.LENGTH_LONG).show();
+
                             progressBar.setVisibility(View.GONE);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }
