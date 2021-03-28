@@ -189,7 +189,7 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
     private boolean validationField(TextInputLayout textInputLayout) {
         if (Objects.requireNonNull(textInputLayout.getEditText()).getText().toString().isEmpty()) {
             textInputLayout.setErrorEnabled(true);
-            textInputLayout.setError("");
+            textInputLayout.setError("*");
             return false;
         } else {
             textInputLayout.setErrorEnabled(false);
