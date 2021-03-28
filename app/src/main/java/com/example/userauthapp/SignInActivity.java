@@ -271,11 +271,11 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
 
-                            String fullname = currentUser != null ? currentUser.getDisplayName() : null;
-                            String email = currentUser != null ? currentUser.getEmail() : null;
-                            String phonenumber = currentUser != null ? currentUser.getPhoneNumber() : null;
+                            String fullname = currentUser != null ? currentUser.getDisplayName() : "none";
+                            String email = currentUser != null ? currentUser.getEmail() : "none";
+                            String phonenumber = currentUser != null ? currentUser.getPhoneNumber() : "none";
 
-                            User user = new User(fullname, email, phonenumber);
+                            User user = new User(fullname, email, phonenumber != null ? phonenumber : "none");
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).setValue(user)

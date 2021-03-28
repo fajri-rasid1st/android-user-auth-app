@@ -16,7 +16,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
@@ -30,7 +29,6 @@ import com.google.firebase.database.ValueEventListener;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Objects;
 
 public class HomeActivity extends AppCompatActivity {
     TextView homeTitle;
@@ -59,29 +57,22 @@ public class HomeActivity extends AppCompatActivity {
         TextView textDate = findViewById(R.id.textDate);
         textDate.setText(date);
 
-        GoogleSignInAccount signInAccount = GoogleSignIn.getLastSignedInAccount(this);
+        reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                User userProfile = snapshot.getValue(User.class);
 
-        if (signInAccount != null) {
-            String name = Objects.requireNonNull(signInAccount.getDisplayName()).split(" ")[0];
-            homeTitle.setText("Welcome, " + name.replaceFirst(String.valueOf(name.charAt(0)), String.valueOf(name.charAt(0)).toUpperCase()) + ".");
-        } else {
-            reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot snapshot) {
-                    User userProfile = snapshot.getValue(User.class);
-
-                    if (userProfile != null) {
-                        String name = userProfile.getFullname().split(" ")[0];
-                        homeTitle.setText("Welcome, " + name.replaceFirst(String.valueOf(name.charAt(0)), String.valueOf(name.charAt(0)).toUpperCase()) + ".");
-                    }
+                if (userProfile != null) {
+                    String name = userProfile.getFullname().split(" ")[0];
+                    homeTitle.setText("Welcome, " + name.replaceFirst(String.valueOf(name.charAt(0)), String.valueOf(name.charAt(0)).toUpperCase()) + ".");
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError error) {
-                    Toast.makeText(HomeActivity.this, "Oops, something wrong happen.", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+                Toast.makeText(HomeActivity.this, "Oops, something wrong happen.", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

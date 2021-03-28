@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -43,9 +44,9 @@
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/nunito_sans_bold"
         android:gravity="center"
-        tools:text="+6282290380510"
         android:textColor="@color/primary_color"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        tools:text="+6282290380510" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -53,18 +54,41 @@
         android:layout_marginBottom="16dp"
         android:orientation="horizontal">
 
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpLayout1"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otpEditText1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
         <Space
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
 
         <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpLayout2"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content">
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/otp_1"
+                android:id="@+id/otpEditText2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/nunito_sans_semibold"
@@ -76,72 +100,105 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Space
-            android:layout_width="14dp"
-            android:layout_height="match_parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/otp_2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_sans_semibold"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textColor="@color/secondary_text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="14dp"
-            android:layout_height="match_parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/otp_3"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_sans_semibold"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textColor="@color/secondary_text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="14dp"
-            android:layout_height="match_parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="54dp"
-            android:layout_height="wrap_content">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/otp_4"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/nunito_sans_semibold"
-                android:gravity="center"
-                android:inputType="number"
-                android:maxLength="1"
-                android:textColor="@color/secondary_text" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Space
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpLayout3"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otpEditText3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpLayout4"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otpEditText4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpLayout5"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otpEditText5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <Space
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/otpLayout6"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            app:errorEnabled="false"
+            app:errorIconDrawable="@null">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/otpEditText6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/nunito_sans_semibold"
+                android:gravity="center"
+                android:inputType="number"
+                android:maxLength="1"
+                android:textColor="@color/secondary_text" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
 
     </LinearLayout>
 
@@ -162,7 +219,7 @@
             android:textSize="16sp" />
 
         <TextView
-            android:id="@+id/tv_sign_up"
+            android:id="@+id/tv_resend_otp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_sans_semibold"
@@ -188,7 +245,7 @@
         android:layout_width="90dp"
         android:layout_height="90dp"
         android:layout_gravity="center"
-        android:layout_marginTop="-250dp"
+        android:layout_marginTop="-230dp"
         android:visibility="invisible" />
 
 </LinearLayout>

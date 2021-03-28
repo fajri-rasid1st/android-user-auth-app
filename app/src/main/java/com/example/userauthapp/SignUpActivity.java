@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
             String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString().trim();
             String repeatPass = Objects.requireNonNull(tilRepeatPass.getEditText()).getText().toString().trim();
-            String phonenumber = "+62" + metPhone.getUnMasked();
+            String phonenumber = metPhone.getUnMasked();
             confirmSignUp(fullname, email, password, repeatPass, phonenumber);
 
         }
@@ -156,7 +156,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            User user = new User(fullname, email, phonenumber);
+                            User user = new User(fullname, email, "+62" + phonenumber);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).setValue(user)
