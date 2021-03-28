@@ -66,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
             String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
             String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString().trim();
             String repeatPass = Objects.requireNonNull(tilRepeatPass.getEditText()).getText().toString().trim();
-            String phonenumber = "0" + metPhone.getUnMasked();
+            String phonenumber = "+62" + metPhone.getUnMasked();
             confirmSignUp(fullname, email, password, repeatPass, phonenumber);
 
         }
@@ -164,7 +164,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                         @Override
                                         public void onComplete(@NonNull Task<Void> task) {
                                             if (task.isSuccessful()) {
-                                                Toast.makeText(SignUpActivity.this, "Your account has been register successfully.", Toast.LENGTH_LONG).show();
+                                                Toast.makeText(SignUpActivity.this, "Your account has been register successfully", Toast.LENGTH_LONG).show();
                                                 Intent signInIntent = new Intent(SignUpActivity.this, SignInActivity.class);
                                                 startActivity(signInIntent);
                                             } else {

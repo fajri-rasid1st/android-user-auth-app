@@ -23,9 +23,8 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
         btnSubmitOTP.setOnClickListener(this);
 
         TextView tvPhoneNumber = findViewById(R.id.text_phone_number);
-        String phonenumber = getIntent().getStringExtra("phonenumber").replaceFirst("0", "");
 
-        tvPhoneNumber.setText(String.format("+62-%s", phonenumber));
+        tvPhoneNumber.setText(getIntent().getStringExtra("phonenumber"));
 
         otp1 = findViewById(R.id.otp_1);
         otp2 = findViewById(R.id.otp_2);

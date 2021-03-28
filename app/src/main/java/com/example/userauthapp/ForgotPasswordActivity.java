@@ -79,7 +79,7 @@ public class ForgotPasswordActivity extends AppCompatActivity implements View.On
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()) {
-                    Toast.makeText(ForgotPasswordActivity.this, "Check your email to reset your password.", Toast.LENGTH_LONG).show();
+                    Toast.makeText(ForgotPasswordActivity.this, "Check your email to reset your password", Toast.LENGTH_LONG).show();
                     Intent signInIntent = new Intent(ForgotPasswordActivity.this, SignInActivity.class);
                     startActivity(signInIntent);
                 } else {
