@@ -18,13 +18,16 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
+import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Objects;
+import java.util.concurrent.TimeUnit;
 
 public class OTPAuthActivity extends AppCompatActivity implements View.OnClickListener {
     private TextInputEditText etOtp1, etOtp2, etOtp3, etOtp4, etOtp5, etOtp6;
@@ -32,6 +35,7 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
     private TextView tvPhoneNumber;
     private ProgressBar progressBar;
     private String verificationId;
+    private PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks;
     private FirebaseAuth mFirebaseAuth;
 
     @Override
@@ -40,11 +44,15 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
         setContentView(R.layout.activity_o_t_p_auth);
 
         progressBar = findViewById(R.id.progress_bar);
+
         mFirebaseAuth = FirebaseAuth.getInstance();
         verificationId = getIntent().getStringExtra("verificationid");
 
         Button btnSubmitOTP = findViewById(R.id.btn_submit_otp);
         btnSubmitOTP.setOnClickListener(this);
+
+        TextView tvResendOtp = findViewById(R.id.tv_resend_otp);
+        tvResendOtp.setOnClickListener(this);
 
         tvPhoneNumber = findViewById(R.id.text_phone_number);
         tvPhoneNumber.setText(getIntent().getStringExtra("phonenumber"));
@@ -64,6 +72,30 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
         tilOtp4 = findViewById(R.id.otpLayout4);
         tilOtp5 = findViewById(R.id.otpLayout5);
         tilOtp6 = findViewById(R.id.otpLayout6);
+
+        mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
+            @Override
+            public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
+            }
+
+            @Override
+            public void onVerificationFailed(@NonNull FirebaseException e) {
+                progressBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                Toast.makeText(OTPAuthActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onCodeSent(@NonNull String s, @NonNull PhoneAuthProvider.ForceResendingToken forceResendingToken) {
+                super.onCodeSent(s, forceResendingToken);
+
+                progressBar.setVisibility(View.GONE);
+                getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+                Toast.makeText(OTPAuthActivity.this, "OTP code has been sended", Toast.LENGTH_SHORT).show();
+
+                verificationId = s;
+            }
+        };
 
         setUpOTPInputs();
     }
@@ -87,6 +119,8 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
 
             PhoneAuthCredential credential = PhoneAuthProvider.getCredential(verificationId, otpInput.trim());
             signInWithPhoneAuthCredential(credential);
+        } else if (view.getId() == R.id.tv_resend_otp) {
+            sendOTP(getIntent().getStringExtra("phonenumber"));
         }
     }
 
@@ -95,6 +129,21 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
         super.onBackPressed();
         progressBar.setVisibility(View.GONE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+    }
+
+    private void sendOTP(String phonenumber) {
+        progressBar.setVisibility(View.VISIBLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
+        PhoneAuthOptions options =
+                PhoneAuthOptions.newBuilder(mFirebaseAuth)
+                        .setPhoneNumber(phonenumber) // Phone number to verify
+                        .setTimeout(60L, TimeUnit.SECONDS) // Time out and unit
+                        .setActivity(OTPAuthActivity.this) // Activity (for callback binding)
+                        .setCallbacks(mCallbacks) // OnVerificationStateChangedCallbacks
+                        .build();
+
+        PhoneAuthProvider.verifyPhoneNumber(options);
     }
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
@@ -106,10 +155,9 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            String fullname = "User@" + (int) (Math.random() * 90000) + 10000;
                             String phonenumber = tvPhoneNumber.getText().toString();
 
-                            User user = new User(fullname, "none", phonenumber);
+                            User user = new User("Anonymous", "none", phonenumber);
 
                             FirebaseDatabase.getInstance().getReference("Users")
                                     .child(Objects.requireNonNull(FirebaseAuth.getInstance().getUid())).setValue(user)
