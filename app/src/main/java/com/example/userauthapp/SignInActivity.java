@@ -42,17 +42,23 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private final static int RC_SIGN_IN = 123;
     private FirebaseAuth mFirebaseAuth;
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        // Check if user is signed in (non-null) and update UI accordingly.
+    @Override
+    public void onStart() {
+        super.onStart();
+
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+
+        editor.putString("remember", "false");
+        editor.apply();
+//        Check if user is signed in (non-null) and update UI accordingly.
 //        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
 //
 //        if (currentUser != null) {
 //            Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
 //            startActivity(homeIntent);
 //        }
-//    }
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,8 +140,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         } else if (view.getId() == R.id.btn_sign_in) {
 
-            String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString().trim();
-            String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString().trim();
+            String email = Objects.requireNonNull(tilEmail.getEditText()).getText().toString();
+            String password = Objects.requireNonNull(tilPassword.getEditText()).getText().toString();
             confirmSignIn(email, password);
 
         } else if (view.getId() == R.id.btn_sign_in_phone_number) {
@@ -195,7 +201,7 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     private void confirmSignIn(String email, String password) {
-        if (!validateEmail(email) | !validatePassword(password)) return;
+        if (!validatePassword(password) | !validateEmail(email)) return;
 
         tilEmail.setErrorEnabled(false);
         tilPassword.setErrorEnabled(false);
