@@ -37,7 +37,9 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressBar progressBar;
     private TextInputLayout tilEmail, tilPassword;
     private GoogleSignInClient mGoogleSignInClient;
+    private Toast exitToast;
     private FirebaseAuth mFirebaseAuth;
+    private long backPressedTime;
     private final static int RC_SIGN_IN = 123;
 
     @Override
@@ -79,8 +81,10 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         String checkBox = preferences.getString("remember", "");
 
         if (checkBox.equals("true")) {
-            Intent homeIntent = new Intent(SignInActivity.this, HomeActivity.class);
-            startActivity(homeIntent);
+            if (mFirebaseAuth.getCurrentUser() != null) {
+                Intent homeIntent = new Intent(SignInActivity.this, HomeActivity.class);
+                startActivity(homeIntent);
+            }
         }
 
         CheckBox rememberMe = findViewById(R.id.remember_me);
@@ -133,16 +137,19 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-
         progressBar.setVisibility(View.GONE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
+        if (backPressedTime + 2000 > System.currentTimeMillis()) {
+            exitToast.cancel();
+            super.onBackPressed();
+            return;
+        } else {
+            exitToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
+            exitToast.show();
+        }
 
-        editor.putString("remember", "false");
-        editor.apply();
+        backPressedTime = System.currentTimeMillis();
     }
 
     private boolean validateEmail(String email) {

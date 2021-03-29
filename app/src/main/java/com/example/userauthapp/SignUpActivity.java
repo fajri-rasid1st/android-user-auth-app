@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Patterns;
 import android.view.View;
@@ -29,17 +28,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
     private TextInputLayout tilEmail, tilPassword, tilFullname, tilRepeatPass, tilPhone;
     private MaskEditText metPhone;
     private FirebaseAuth mFirebaseAuth;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        editor.putString("remember", "false");
-        editor.apply();
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
