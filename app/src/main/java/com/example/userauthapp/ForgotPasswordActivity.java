@@ -20,9 +20,9 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.Objects;
 
 public class ForgotPasswordActivity extends AppCompatActivity implements View.OnClickListener {
-    TextInputLayout tilEmail;
-    ProgressBar progressBar;
-    FirebaseAuth mFirebaseAuth;
+    private TextInputLayout tilEmail;
+    private ProgressBar progressBar;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

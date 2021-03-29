@@ -16,12 +16,11 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Objects;
+
 
 public class ProfileActivity extends AppCompatActivity {
-    TextView tvNickname, tvFullname, tvEmail, tvPhonenumber;
-    DatabaseReference reference;
-    String userId;
-    FirebaseUser user;
+    private TextView tvNickname, tvFullname, tvEmail, tvPhonenumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,18 +30,18 @@ public class ProfileActivity extends AppCompatActivity {
         Toolbar toolbarProfile = findViewById(R.id.toolbar_profile);
         setSupportActionBar(toolbarProfile);
 
-        assert getSupportActionBar() != null;
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayHomeAsUpEnabled(true);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        userId = user.getUid();
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        String userId = user != null ? user.getUid() : null;
 
         tvNickname = findViewById(R.id.nick_name);
         tvFullname = findViewById(R.id.fullname_text);
         tvEmail = findViewById(R.id.email_text);
         tvPhonenumber = findViewById(R.id.phone_text);
 
+        assert userId != null;
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {

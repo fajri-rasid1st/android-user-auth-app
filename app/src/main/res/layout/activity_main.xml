@@ -10,6 +10,7 @@
     <RelativeLayout
         android:paddingHorizontal="26dp"
         android:paddingVertical="40dp"
+        android:layout_gravity="center_vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -31,21 +32,6 @@
             android:text="@string/lorem"
             android:textColor="@color/text_and_icons"
             android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/btn_started"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/sub_title"
-            android:layout_marginTop="432dp"
-            android:backgroundTint="@color/text_and_icons"
-            android:fontFamily="@font/nunito_sans_bold"
-            android:paddingVertical="10dp"
-            android:text="@string/get_started"
-            android:textAllCaps="false"
-            android:elevation="4dp"
-            android:textColor="@color/primary_text"
-            android:textSize="18sp" />
 
     </RelativeLayout>
 

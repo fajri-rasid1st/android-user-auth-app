@@ -81,7 +81,7 @@ public class PhoneNumberActivity extends AppCompatActivity {
                         otpAuthIntent.putExtra("phonenumber", phone);
                         startActivity(otpAuthIntent);
                     }
-                }, 3000);
+                }, 2000);
             }
         };
     }

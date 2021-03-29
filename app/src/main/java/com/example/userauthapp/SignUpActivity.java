@@ -25,10 +25,10 @@ import com.santalu.maskara.widget.MaskEditText;
 import java.util.Objects;
 
 public class SignUpActivity extends AppCompatActivity implements View.OnClickListener {
-    ProgressBar progressBar;
-    TextInputLayout tilEmail, tilPassword, tilFullname, tilRepeatPass, tilPhone;
-    MaskEditText metPhone;
-    FirebaseAuth mFirebaseAuth;
+    private ProgressBar progressBar;
+    private TextInputLayout tilEmail, tilPassword, tilFullname, tilRepeatPass, tilPhone;
+    private MaskEditText metPhone;
+    private FirebaseAuth mFirebaseAuth;
 
     @Override
     public void onStart() {
@@ -53,9 +53,7 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
         btnSignUp.setOnClickListener(this);
 
         mFirebaseAuth = FirebaseAuth.getInstance();
-
         progressBar = findViewById(R.id.progress_bar);
-
         tilEmail = findViewById(R.id.tilEmail);
         tilPassword = findViewById(R.id.tilPassword);
         tilRepeatPass = findViewById(R.id.tilRepeatPassword);
@@ -189,7 +187,6 @@ public class SignUpActivity extends AppCompatActivity implements View.OnClickLis
                                     });
                         } else {
                             Toast.makeText(SignUpActivity.this, "Register failed. Try again.", Toast.LENGTH_LONG).show();
-
                             progressBar.setVisibility(View.GONE);
                             getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
                         }

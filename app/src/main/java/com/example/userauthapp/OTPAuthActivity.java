@@ -48,14 +48,14 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
         mFirebaseAuth = FirebaseAuth.getInstance();
         verificationId = getIntent().getStringExtra("verificationid");
 
+        tvPhoneNumber = findViewById(R.id.text_phone_number);
+        tvPhoneNumber.setText(getIntent().getStringExtra("phonenumber"));
+
         Button btnSubmitOTP = findViewById(R.id.btn_submit_otp);
         btnSubmitOTP.setOnClickListener(this);
 
         TextView tvResendOtp = findViewById(R.id.tv_resend_otp);
         tvResendOtp.setOnClickListener(this);
-
-        tvPhoneNumber = findViewById(R.id.text_phone_number);
-        tvPhoneNumber.setText(getIntent().getStringExtra("phonenumber"));
 
         // initialize edit text
         etOtp1 = findViewById(R.id.otpEditText1);
@@ -72,6 +72,8 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
         tilOtp4 = findViewById(R.id.otpLayout4);
         tilOtp5 = findViewById(R.id.otpLayout5);
         tilOtp6 = findViewById(R.id.otpLayout6);
+
+        setUpOTPInputs();
 
         mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
@@ -96,8 +98,6 @@ public class OTPAuthActivity extends AppCompatActivity implements View.OnClickLi
                 verificationId = s;
             }
         };
-
-        setUpOTPInputs();
     }
 
     @Override

@@ -37,28 +37,8 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
     private ProgressBar progressBar;
     private TextInputLayout tilEmail, tilPassword;
     private GoogleSignInClient mGoogleSignInClient;
-    private Toast exitToast;
-    private long backPressedTime;
-    private final static int RC_SIGN_IN = 123;
     private FirebaseAuth mFirebaseAuth;
-
-    @Override
-    public void onStart() {
-        super.onStart();
-
-        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-
-        editor.putString("remember", "false");
-        editor.apply();
-//        Check if user is signed in (non-null) and update UI accordingly.
-//        FirebaseUser currentUser = mFirebaseAuth.getCurrentUser();
-//
-//        if (currentUser != null) {
-//            Intent homeIntent = new Intent(getApplicationContext(), HomeActivity.class);
-//            startActivity(homeIntent);
-//        }
-    }
+    private final static int RC_SIGN_IN = 123;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,7 +76,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
         // 'remember me' fuctionality
         SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
-
         String checkBox = preferences.getString("remember", "");
 
         if (checkBox.equals("true")) {
@@ -105,7 +84,6 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
         }
 
         CheckBox rememberMe = findViewById(R.id.remember_me);
-
         rememberMe.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -155,19 +133,16 @@ public class SignInActivity extends AppCompatActivity implements View.OnClickLis
 
     @Override
     public void onBackPressed() {
+        super.onBackPressed();
+
         progressBar.setVisibility(View.GONE);
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
 
-        if (backPressedTime + 2000 > System.currentTimeMillis()) {
-            exitToast.cancel();
-            super.onBackPressed();
-            return;
-        } else {
-            exitToast = Toast.makeText(getBaseContext(), "Press back again to exit", Toast.LENGTH_SHORT);
-            exitToast.show();
-        }
+        SharedPreferences preferences = getSharedPreferences("checkbox", MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
 
-        backPressedTime = System.currentTimeMillis();
+        editor.putString("remember", "false");
+        editor.apply();
     }
 
     private boolean validateEmail(String email) {

@@ -31,10 +31,7 @@ import java.util.Date;
 import java.util.Locale;
 
 public class HomeActivity extends AppCompatActivity {
-    TextView homeTitle;
-    DatabaseReference reference;
-    String userId;
-    FirebaseUser user;
+    private TextView homeTitle;
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -42,13 +39,14 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
+        homeTitle = findViewById(R.id.home_title);
+
         Toolbar toolbarHome = findViewById(R.id.toolbar_home);
         setSupportActionBar(toolbarHome);
 
-        user = FirebaseAuth.getInstance().getCurrentUser();
-        reference = FirebaseDatabase.getInstance().getReference("Users");
-        userId = user.getUid();
-        homeTitle = findViewById(R.id.home_title);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference("Users");
+        String userId = user != null ? user.getUid() : null;
 
         String pattern = "dd/MM/yyyy";
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern, new Locale("id", "ID"));
@@ -57,6 +55,7 @@ public class HomeActivity extends AppCompatActivity {
         TextView textDate = findViewById(R.id.textDate);
         textDate.setText(date);
 
+        assert userId != null;
         reference.child(userId).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
