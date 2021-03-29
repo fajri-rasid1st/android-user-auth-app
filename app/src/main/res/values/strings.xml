@@ -34,7 +34,7 @@
     <string name="or">Or</string>
     <string name="sign_in_with_phone_number">Sign in with phone number</string>
     <string name="sign_in_with">Sign in with</string>
-    <string name="enter_the_phone_number_that_you_registered_earlier">Enter the phone number that you registered earlier.</string>
+    <string name="enter_the_phone_number_that_you_registered_earlier">Enter your phone number below and we will send you OTP code.</string>
     <string name="phone_number_2">Phone Number</string>
     <string name="send_otp">Send OTP</string>
     <string name="otp_verification">OTP Verification</string>
